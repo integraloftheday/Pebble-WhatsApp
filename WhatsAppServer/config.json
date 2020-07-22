@@ -1,0 +1,16 @@
+{
+"key":"abc",
+"port":5000,
+"saveLogin":false,
+"contacts":[
+	{
+		"buddyName":"Demo",
+		"displayName":"Demo" 
+	},
+	{
+		"buddyName":"Demo2",
+		"displayName":"Demo2" 
+	}
+
+]
+}
