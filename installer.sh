@@ -1,26 +1,22 @@
 #!/bin/bash 
 
-echo "Creating Python Virtual Environment"
+echo "Creating Node.js Folder"
 
-python3 -m venv PebbleImessageServer
-
-source PebbleImessageServer/bin/activate
+mkdir PebbleWhatsApp
 
 echo "Downloading Required Files"
 
-curl -o PebbleImessageServer/app.py https://raw.githubusercontent.com/integraloftheday/Pebble-Imessager/master/imessageServer/app.py
+curl -o PebbleWhatsApp/app.js https://raw.githubusercontent.com/integraloftheday/Pebble-WhatsApp/master/WhatsAppServer/app.js
 
-curl -o PebbleImessageServer/config.json https://raw.githubusercontent.com/integraloftheday/Pebble-Imessager/master/imessageServer/config.json
+curl -o PebbleWhatsApp/config.json https://raw.githubusercontent.com/integraloftheday/Pebble-WhatsApp/master/WhatsAppServer/config.json 
 
-curl -o PebbleImessageServer/requirements.txt https://raw.githubusercontent.com/integraloftheday/Pebble-Imessager/master/imessageServer/requirements.txt
+curl -o PebbleWhatsApp/package.json https://raw.githubusercontent.com/integraloftheday/Pebble-WhatsApp/master/WhatsAppServer/package.json 
 
-curl -o PebbleImessageServer/start.sh https://raw.githubusercontent.com/integraloftheday/Pebble-Imessager/master/imessageServer/start.sh
-
-pip install -r PebbleImessageServer/requirements.txt
+npm install --prefix PebbleWhatsApp/ 
 
 echo "Now edit config.json to add contacts, to change the port number, and to set the key" 
 
-echo "Use sh start.sh to start the server"
+echo "Use node app.js to start the server in side PebbleWahtsApp"
 
 
 
