@@ -8,7 +8,7 @@ A [PebbleJs](https://github.com/pebble/pebblejs) and Server Application to allow
 
 ## About
 
-Using this watch app and server microphone enabled pebbles can **reply** to WhatApp messages and **start*** WhatApp messages. Based on [GitHub - integraloftheday/Pebble-Imessager: A PebbleJs and Server Application to allow imessage texting on pebble smart watches](https://github.com/integraloftheday/Pebble-Imessager)
+Using this watch app and server microphone enabled pebbles can **reply** to WhatApp messages and **start** WhatApp messages. Based on [GitHub - integraloftheday/Pebble-Imessager: A PebbleJs and Server Application to allow imessage texting on pebble smart watches](https://github.com/integraloftheday/Pebble-Imessager)
 
 ## A Security Note
 
