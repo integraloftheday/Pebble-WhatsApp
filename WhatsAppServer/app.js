@@ -57,8 +57,8 @@ app.post("/what/api/v1/send",function(req,res){
   var config = JSON.parse(fs.readFileSync("./config.json","utf-8"));
   console.log("MessageSend:",req.body);
     if(config.key == req.body.key){
-      try {
-        
+      try {  
+        console.log("Sending Message")
         client.sendTextMessage(req.body.to,req.body.msg);
         var response = {"sucess":"true"};
         res.status(200).json(response);
