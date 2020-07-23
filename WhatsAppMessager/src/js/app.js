@@ -76,7 +76,7 @@ function ipConf(){
 		 }
 	 });
 	conf.on('click','select', function(){
-		Settings.data('URL',{value:baseUrl+ipToString()+":"+String(Port)});
+		Settings.data('URLW',{value:baseUrl+ipToString()+":"+String(Port)});
 		conf.hide();
 		//settingsMenu.show();
 	});
@@ -92,8 +92,8 @@ function ipToString(){
 }    
 
 function init(){
-	var url = Settings.data('URL');
-        var key = Settings.data('key');
+	var url = Settings.data('URLW');
+        var key = Settings.data('keyW');
 
 	if(url == null){
 		IPget();
@@ -105,13 +105,13 @@ function init(){
 }
 
 function getContacts(){
-	var url = Settings.data('URL'); 
-	var key = Settings.data('key');
-	var postUrl = url.value + "/msg/api/v1/contacts"; 
+	var url = Settings.data('URLW'); 
+	var key = Settings.data('keyW');
+	var postUrl = url.value + "/what/api/v1/contacts"; 
 	ajax({url:postUrl,type:'json',method:'post',data:{'key':key.value}},
 		function(data,statusV){
 			if(statusV==200){
-				Settings.data('contacts',{value:data.contacts});
+				Settings.data('contactsW',{value:data.contacts});
 				sectionCons = menuSections();
         			menu.items(2,sectionCons);
 			}
@@ -126,7 +126,8 @@ function getContacts(){
 }
 
 function menuSections(){
-	var contactS = Settings.data('contacts');
+	try{
+	var contactS = Settings.data('contactsW');
 	var contacts = contactS.value;
 	var sections= []; 
 	for(var i =0; i<contacts.length; i++){
@@ -135,6 +136,10 @@ function menuSections(){
 		});
 	}
 	return(sections);
+	}
+	catch(error){
+	return([{title:""}]);
+	}
 }
 
 function keyGen(length){
@@ -144,15 +149,15 @@ function keyGen(length){
    for ( var i = 0; i < length; i++ ) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
    }
-   Settings.data('key',{value:result})
+   Settings.data('keyW',{value:result})
    return result;
 }
 
 
 function msgSend(to){
-	var url = Settings.data('URL');
-	var key = Settings.data('key');
-	var postUrl = url.value + "/msg/api/v1/send";
+	var url = Settings.data('URLW');
+	var key = Settings.data('keyW');
+	var postUrl = url.value + "/what/api/v1/send";
 	Voice.dictate('start',true,function(e){
 		if(e.err){
 			console.log('Error:'+e.err);
@@ -175,9 +180,9 @@ function msgSend(to){
 		});
 }
 function dispCurrent(){
-	var url = Settings.data('URL');
-	var key = Settings.data('key');
-	var contacts = Settings.data('contacts'); 
+	var url = Settings.data('URLW');
+	var key = Settings.data('keyW');
+	var contacts = Settings.data('contactsW'); 
 	var Current = new UI.Card({
 		title:"IP & Key",
 		style:'small',
@@ -254,7 +259,7 @@ settingsMenu.on('select',function(e){
 var menu = new UI.Menu({
     sections: [{
       items: [{
-        title: 'iMessager',
+        title: 'WhatsApp',
         icon: 'images/pebble_msg_menu_icon.png',
         subtitle: 'Settings'
       },
@@ -263,12 +268,12 @@ var menu = new UI.Menu({
   });
 
 menu.on('select',function(e){
-	if(e.item.title == "iMessager"){
+	if(e.item.title == "WhatsApp"){
 		//about page
 		settingsMenu.show(); 
 	}
 	else{
-		var contacts = Settings.data('contacts');
+		var contacts = Settings.data('contactsW');
 		msgSend(contacts.value[e.itemIndex].buddyName);	
 	}
 });
@@ -283,4 +288,3 @@ function main(){
 //Main Start 
 
 main();
-
